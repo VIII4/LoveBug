@@ -71,15 +71,24 @@ var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
 
 function addUser(_profile) {
   //check if profile exist return false if user cant be added, return true if can
+  var allowed = true;
   userProfiles.forEach((element) => {
     if (element.uniqueID === _profile.uniqueID) {
       //User ID exist
-      return false;
-    } else {
-      //add profile to array
-      userProfiles.push(_profile);
+      allowed = false;
     }
   });
+  if (allowed) {
+    userProfiles.push(_profile);
+    //Print User Profiles
+    console.log("Profile Added");
+    console.log(userProfiles);
+    return true;
+  } else {
+    console.log("User Exist");
+    console.log(userProfiles);
+    return false;
+  }
 }
 
 //Starter Profiles
@@ -91,7 +100,12 @@ userProfiles.push(
 );
 
 // Exports
+module.exports = {
+  userProfiles: userProfiles,
+  UserProfile: UserProfile,
+  addUser: addUser,
+};
 
 //Debug
 //console.log(userProfiles);
-console.log(userProfiles[1].getSuggestedFriends());
+//console.log(userProfiles[1].getSuggestedFriends());
