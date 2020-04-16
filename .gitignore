@@ -1,0 +1,17 @@
+#Memo's
+memo/
+misc/
+
+# Env
+.env
+.env.test
+
+# Logs
+logs
+*.log
+npm-debug.log*
+
+# Dependency directories
+node_modules/
+jspm_packages/
+
