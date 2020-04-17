@@ -18,14 +18,13 @@ module.exports = function (app) {
 
   //Retrieve specific profile
   app.get("/api/profile/:userID", function (req, res) {
-    var _profile;
+    console.log(req.params.userID);
     userProfiles.forEach((profile) => {
-      if (profile.uniqueID === req.param.userID) {
-        _profile = profile;
+      if (profile.uniqueID === req.params.userID) {
+        res.send(profile);
         return;
       }
     });
-    res.send(_profile);
   });
 
   //Retrieve match for user

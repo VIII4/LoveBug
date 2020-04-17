@@ -5,8 +5,8 @@ var userProfiles = [];
 
 var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
   //Properties
-  this.name = name.trim();
-  this.uniqueID = uniqueID.trim();
+  this.name = name.trim().toLowerCase().replace(/\s+/g, "");
+  this.uniqueID = uniqueID.trim().toLowerCase().replace(/\s+/g, "");
   this.profilePic = imageUrl;
   this.surveyResults = surveyResults;
   this.friendMatch;
@@ -120,8 +120,8 @@ function addUser(_profile) {
 
 //Starter Profiles
 userProfiles.push(
-  new UserProfile("iyan", "DWbucks", "www.mypic.com/pic", [1, 2, 4, 5, 1]),
-  new UserProfile("johnny", "Yup", "www.mypic.com/pic", [4, 3, 1, 4, 3]),
+  new UserProfile("iyan", "dwbucks", "www.mypic.com/pic", [1, 2, 4, 5, 1]),
+  new UserProfile("johnny", "yup", "www.mypic.com/pic", [4, 3, 1, 4, 3]),
   new UserProfile("mike", "shemmy", "www.mypic.com/pic", [3, 3, 5, 2, 4]),
   new UserProfile("dre", "cuts", "www.mypic.com/pic", [5, 6, 2, 5, 1])
 );
