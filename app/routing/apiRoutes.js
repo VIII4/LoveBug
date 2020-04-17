@@ -59,8 +59,3 @@ module.exports = function (app) {
     res.json(valid);
   });
 };
-
-//Add user function
-// users.addUser(
-//   new UserProfile("name", "uniqueID", "wwww.profilepic.com", [1, 1, 1, 1, 1])
-// );

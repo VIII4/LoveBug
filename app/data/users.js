@@ -3,13 +3,15 @@ var userProfiles = [];
 
 //// Constructor Objects
 
-var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
-  //Properties
+var UserProfile = function (name, uniqueID, imageUrl, scores) {
+  //Profile Properties
   this.name = name.trim().toLowerCase().replace(/\s+/g, "");
   this.uniqueID = uniqueID.trim().toLowerCase().replace(/\s+/g, "");
   this.profilePic = imageUrl;
-  this.surveyResults = surveyResults;
+  this.scores = scores;
   this.friendMatch;
+
+  //Methods
   this.getMatch = function () {
     var _suggestedMatch;
     var _lowScore = 10000000;
@@ -18,8 +20,8 @@ var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
       if (profile.uniqueID === this.uniqueID) {
         return;
       }
-      var resultsComparison = profile.surveyResults;
-      var userResults = this.surveyResults;
+      var resultsComparison = profile.scores;
+      var userResults = this.scores;
       var matchScore = 0;
 
       for (var i = 0; i < userResults.length; i++) {
@@ -35,9 +37,8 @@ var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
     friendMatch = _suggestedMatch;
     return _suggestedMatch;
   };
-  //this.suggestedFriends = [];
 
-  //Methods
+  //this.suggestedFriends = [];
   // this.getSuggestedFriends = function () {
   //   // store suggested results to return
   //   var _suggestedFriends = [];
@@ -62,8 +63,8 @@ var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
   //   //Go through each object in profiles, pull survey results, subtract scores to get match score total,
   //   //store score and profile in results array. {profile: element, score: score}
   //   userProfiles.forEach((profile) => {
-  //     var resultsComparison = profile.surveyResults;
-  //     var userResults = this.surveyResults;
+  //     var resultsComparison = profile.scores;
+  //     var userResults = this.scores;
   //     var matchScore = 0;
 
   //     for (var i = 0; i < userResults.length; i++) {
@@ -119,10 +120,54 @@ function addUser(_profile) {
 
 //Starter Profiles
 userProfiles.push(
-  new UserProfile("iyan", "dwbucks", "www.mypic.com/pic", [1, 2, 4, 5, 1]),
-  new UserProfile("johnny", "yup", "www.mypic.com/pic", [4, 3, 1, 4, 3]),
-  new UserProfile("mike", "shemmy", "www.mypic.com/pic", [3, 3, 5, 2, 4]),
-  new UserProfile("dre", "cuts", "www.mypic.com/pic", [5, 6, 2, 5, 1])
+  new UserProfile("iyan", "dwbucks", "www.mypic.com/pic", [
+    1,
+    2,
+    4,
+    5,
+    1,
+    4,
+    3,
+    1,
+    4,
+    3,
+  ]),
+  new UserProfile("johnny", "yup", "www.mypic.com/pic", [
+    4,
+    3,
+    1,
+    4,
+    3,
+    3,
+    3,
+    5,
+    5,
+    2,
+  ]),
+  new UserProfile("mike", "shemmy", "www.mypic.com/pic", [
+    3,
+    3,
+    5,
+    2,
+    4,
+    5,
+    6,
+    2,
+    5,
+    1,
+  ]),
+  new UserProfile("dre", "cuts", "www.mypic.com/pic", [
+    5,
+    6,
+    2,
+    5,
+    1,
+    3,
+    1,
+    4,
+    3,
+    3,
+  ])
 );
 
 // Exports
