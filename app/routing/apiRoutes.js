@@ -8,7 +8,7 @@ var userProfiles = users.userProfiles;
 
 //Export Routes to express server
 module.exports = function (app) {
-  ////GET ROUTES
+  //GET ROUTES
   //============
 
   //Retrieve all profiles
@@ -18,21 +18,39 @@ module.exports = function (app) {
 
   //Retrieve specific profile
   app.get("/api/profile/:userID", function (req, res) {
-    console.log(req.params.userID);
+    userExist = false;
     userProfiles.forEach((profile) => {
       if (profile.uniqueID === req.params.userID) {
-        res.send(profile);
+        res.send(profile.getMatch());
+        userExist = true;
         return;
       }
     });
+    if (!userExist) {
+      res.send(false);
+      return;
+    }
   });
 
   //Retrieve match for user
-  app.get("/api/friends/:user", function (req, res) {
-    res.send(userProfiles);
+  app.get("/api/match/:userID", function (req, res) {
+    var userExist = false;
+    userProfiles.forEach((profile) => {
+      if (profile.uniqueID === req.params.userID) {
+        userExist = true;
+        res.send(profile.getMatch());
+        return;
+      }
+    });
+    if (!userExist) {
+      res.send(false);
+      return;
+    }
   });
 
-  ////POST ROUTES
+  //POST ROUTES
+  //===========
+
   app.post("/api/CreateProfile", function (req, res) {
     data = req.body;
     var valid = addUser(

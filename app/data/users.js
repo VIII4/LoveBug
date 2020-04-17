@@ -12,9 +12,12 @@ var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
   this.friendMatch;
   this.getMatch = function () {
     var _suggestedMatch;
-    var _lowScore;
+    var _lowScore = 10000000;
 
     userProfiles.forEach((profile) => {
+      if (profile.uniqueID === this.uniqueID) {
+        return;
+      }
       var resultsComparison = profile.surveyResults;
       var userResults = this.surveyResults;
       var matchScore = 0;
@@ -23,18 +26,14 @@ var UserProfile = function (name, uniqueID, imageUrl, surveyResults) {
         matchScore =
           matchScore + Math.abs(userResults[i] - resultsComparison[i]);
       }
-
-      //ensure user is not the same as result
-      if (profile.uniqueID != this.uniqueID) {
-        if (matchScore < _lowScore) {
-          _suggestedMatch = profile;
-          _lowScore = matchScore;
-
-          friendMatch = _suggestedMatch;
-          return _suggestedMatch;
-        }
+      if (matchScore < _lowScore) {
+        _suggestedMatch = profile;
+        _lowScore = matchScore;
       }
     });
+
+    friendMatch = _suggestedMatch;
+    return _suggestedMatch;
   };
   //this.suggestedFriends = [];
 
@@ -135,4 +134,4 @@ module.exports = {
 
 //Debug
 //console.log(userProfiles);
-//console.log(userProfiles[1].getSuggestedFriends());
+//console.log(userProfiles[1].getMatch());
