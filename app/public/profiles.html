@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Love Bug</title>
+
+    <!-- CSS Frameworks -->
+    <!-- Font Awesome -->
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+    />
+    <!-- Google Fonts -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    />
+    <!-- Bootstrap core CSS -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Material Design Bootstrap -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/css/mdb.min.css"
+      rel="stylesheet"
+    />
+
+    <!-- Custom Styling -->
+    <style>
+      html,
+      body,
+      header,
+      .view {
+        height: 100%;
+      }
+
+      @media (max-width: 740px) {
+        html,
+        body,
+        header,
+        .view {
+          height: 1000px;
+        }
+      }
+
+      @media (min-width: 800px) and (max-width: 850px) {
+        html,
+        body,
+        header,
+        .view {
+          height: 650px;
+        }
+      }
+      @media (min-width: 800px) and (max-width: 850px) {
+        .navbar:not(.top-nav-collapse) {
+          background: #1c2331 !important;
+        }
+      }
+      /* Navbar animation */
+      .navbar {
+        background-color: rgba(0, 0, 0, 0.3);
+      }
+
+      .top-nav-collapse {
+        background-color: #1c2331;
+      }
+
+      /* Adding color to the Navbar on mobile */
+      @media only screen and (max-width: 768px) {
+        .navbar {
+          background-color: #1c2331;
+        }
+      }
+
+      /* Footer color for sake of consistency with Navbar */
+      .page-footer {
+        background-color: #1c2331;
+      }
+
+      /* scrolling on form */
+      .anyClass {
+        height: 95vh;
+        overflow-y: scroll;
+      }
+    </style>
+
+    <!-- JS Frameworks -->
+    <!-- JQuery -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"
+    ></script>
+    <!-- Bootstrap tooltips -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"
+    ></script>
+    <!-- Bootstrap core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"
+    ></script>
+    <!-- MDB core JavaScript -->
+    <script
+      type="text/javascript"
+      src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.16.0/js/mdb.min.js"
+    ></script>
+  </head>
+  <body>
+    <!-- Profiles Page -->
+
+    <!-- Nav Bar -->
+    <nav class="navbar fixed-top navbar-dark pink accent-2">
+      <a class="navbar-brand" href="#"> <i class="fas fa-bug"></i> LoveBug</a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link waves-effect waves-light" href="#"
+              >Home <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="#">Profiles</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link waves-effect waves-light" href="#"></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a
+              class="nav-link dropdown-toggle waves-effect waves-light"
+              id="navbarDropdownMenuLink"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+              >APIs</a
+            >
+            <div
+              class="dropdown-menu dropdown-info"
+              aria-labelledby="navbarDropdownMenuLink"
+            >
+              <a class="dropdown-item waves-effect waves-light" href="#"
+                >All Users</a
+              >
+              <a class="dropdown-item waves-effect waves-light" href="#"
+                >Specific User</a
+              >
+              <a class="dropdown-item waves-effect waves-light" href="#"
+                ><i class="fab fa-github"></i> Git Repo</a
+              >
+            </div>
+          </li>
+        </ul>
+      </div>
+    </nav>
+
+    <!-- Full Page Intro -->
+    <div class="container view mw-100 mh-100 p-0 m-0">
+      <div class="row m-0 p-0 no-gutters h-100">
+        <!-- User Profile -->
+        <div class="col-4 view pink lighten-5 border-right border-light">
+          <!-- profile pic insterted here -->
+          <img
+            class="h-100"
+            src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+            alt=""
+          />
+        </div>
+        <!-- Profile Card Gallery form -->
+        <div class="col p-4 mt-5 anyClass">
+          <div class="row my-2">
+            <!-- Header -->
+            <div class="col text-center">
+              <h3>Members</h3>
+            </div>
+          </div>
+          <!-- Card Gallery -->
+          <div class="row row-cols-1 row-cols-md-2">
+            <!-- Member Card -->
+            <div class="col mb-4">
+              <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img
+                      src="https://images.pexels.com/photos/1181391/pexels-photo-1181391.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                      class="card-img"
+                      alt="..."
+                    />
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <!-- Title -->
+                      <h4 class="card-title"><strong>User Handle</strong></h4>
+                      <!-- Subtitle -->
+                      <h6 class="font-weight-bold indigo-text pb-0">
+                        "User submitted qoute"
+                      </h6>
+                      <!-- Text -->
+                      <p class="card-text">
+                        Lorem ipsum dolor sit amet, consectetur adipisicing
+                        elit. Voluptatibus, ex, recusandae. Facere modi sunt,
+                        quod quibusdam.
+                      </p>
+
+                      <!-- Button -->
+                      <a class="btn btn-unique">See Profile</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Member Card -->
+          </div>
+        </div>
+      </div>
+      <!-- Mask -->
+      <!-- Mask -->
+    </div>
+    <!-- Full Page Intro -->
+
+    <!-- ALL SCRIPTS HERE -->
+    <script></script>
+  </body>
+</html>
