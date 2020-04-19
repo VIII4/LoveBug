@@ -105,7 +105,14 @@
   <body>
     <!-- Nav Bar -->
     <nav class="navbar fixed-top navbar-dark pink accent-2">
-      <a class="navbar-brand" href="#"> <i class="fas fa-bug"></i> LoveBug</a>
+      <a class="navbar-brand" href="#">
+        <img
+          style="height: 2rem; width: auto;"
+          src="../../assets/images/ladybug.png"
+          alt=""
+        />
+        LoveBug</a
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -210,9 +217,31 @@
                       <input type="text" id="form2" class="form-control" />
                       <label for="form2">Profile Pic (URL)</label>
                     </div>
+                    <select
+                      class="browser-default custom-select mb-4"
+                      id="select"
+                    >
+                      <option value="" disabled="" selected=""
+                        >What are you looking for?</option
+                      >
+                      <option value="1">Female</option>
+                      <option value="2">Male</option>
+                      <option value="3">Doesnt Matter</option>
+                    </select>
 
                     <div class="text-center">
-                      <button class="btn btn-indigo">Start</button>
+                      <button class="btn btn-pink accent-2">
+                        <img
+                          style="
+                            height: 1.75rem;
+                            width: auto;
+                            vertical-align: middle;
+                          "
+                          class="img-fluid"
+                          src="../../assets/images/ladybug.png"
+                          alt=""
+                        />
+                      </button>
                       <hr />
                     </div>
                   </form>

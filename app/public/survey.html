@@ -113,7 +113,15 @@
 
     <!-- Nav Bar -->
     <nav class="navbar fixed-top navbar-dark pink accent-2">
-      <a class="navbar-brand" href="#"> <i class="fas fa-bug"></i> LoveBug</a>
+      <a class="navbar-brand" href="#">
+        <img
+          style="height: 2rem; width: auto;"
+          class="img-fluid"
+          src="../../assets/images/ladybug.png"
+          alt=""
+        />
+        LoveBug</a
+      >
       <button
         class="navbar-toggler"
         type="button"
@@ -447,16 +455,80 @@
             </div>
             <!-- Grid row -->
 
-            <button type="submit" class="btn btn-primary btn-md">
+            <button
+              type="button"
+              class="btn btn-primary btn-md"
+              data-toggle="modal"
+              data-target="#exampleModalCenter"
+            >
               See Your Match
             </button>
           </form>
         </div>
       </div>
       <!-- Mask -->
+
       <!-- Mask -->
     </div>
     <!-- Full Page Intro -->
+
+    <!-- MODAL -->
+    <div
+      class="modal fade"
+      id="exampleModalCenter"
+      tabindex="-1"
+      role="dialog"
+      aria-labelledby="exampleModalCenterTitle"
+      aria-hidden="true"
+    >
+      <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Your Match!</h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col">
+                  <!-- Profile pic -->
+                  <img
+                    src="https://images.pexels.com/photos/1181391/pexels-photo-1181391.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                    alt=""
+                    class="img-fluid"
+                  />
+                </div>
+                <div class="col">
+                  <!-- Info -->
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-warning" data-dismiss="modal">
+              See All Profiles
+            </button>
+            <button type="button" class="btn btn-pink accent-2">
+              <img
+                style="height: 1.55rem; width: auto; vertical-align: middle;"
+                class=""
+                src="../../assets/images/ladybug.png"
+                alt=""
+              /><span class="align-middle"> Bug Em</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- MODAL -->
 
     <!-- ALL SCRIPTS HERE -->
     <script></script>
