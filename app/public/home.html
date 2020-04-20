@@ -108,7 +108,7 @@
       <a class="navbar-brand" href="#">
         <img
           style="height: 2rem; width: auto;"
-          src="../../assets/images/ladybug.png"
+          src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
           alt=""
         />
         LoveBug</a
@@ -209,28 +209,17 @@
                     </p>
                     <div class="md-form">
                       <i class="fas fa-users prefix grey-text"> </i>
-                      <input type="text" id="form3" class="form-control" />
+                      <input type="text" id="userID" class="form-control" />
                       <label for="form3">Unique Handle</label>
                     </div>
                     <div class="md-form">
                       <i class="fas fa-image prefix grey-text"></i>
-                      <input type="text" id="form2" class="form-control" />
+                      <input type="text" id="imageUrl" class="form-control" />
                       <label for="form2">Profile Pic (URL)</label>
                     </div>
-                    <select
-                      class="browser-default custom-select mb-4"
-                      id="select"
-                    >
-                      <option value="" disabled="" selected=""
-                        >What are you looking for?</option
-                      >
-                      <option value="1">Female</option>
-                      <option value="2">Male</option>
-                      <option value="3">Doesnt Matter</option>
-                    </select>
 
                     <div class="text-center">
-                      <button class="btn btn-pink accent-2">
+                      <button class="btn btn-pink accent-2" id="submitButton">
                         <img
                           style="
                             height: 1.75rem;
@@ -238,7 +227,7 @@
                             vertical-align: middle;
                           "
                           class="img-fluid"
-                          src="../../assets/images/ladybug.png"
+                          src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
                           alt=""
                         />
                       </button>
@@ -283,6 +272,36 @@
     <!-- Full Page Intro -->
 
     <!-- ALL SCRIPTS HERE -->
-    <script></script>
+    <script>
+      $(document).ready(function () {
+        var currentUrl = window.location.origin;
+
+        $("#submitButton").click(function (event) {
+          event.preventDefault();
+
+          var _uniqueId = $("#userID").val();
+          var _profilePic = $("#imageUrl").val();
+
+          console.log(_uniqueId + " " + _profilePic);
+          //Send Data to database and load survey page
+          $.post(
+            "/api/CreateProfile",
+            {
+              uniqueID: _uniqueId,
+              profilePic: _profilePic,
+            },
+            function (data, status) {
+              if (!data) {
+                alert("User name already taken, please choose another");
+                return;
+              }
+
+              sessionStorage.setItem("userID", _uniqueId);
+              window.location.href = currentUrl + "/survey";
+            }
+          );
+        });
+      });
+    </script>
   </body>
 </html>

@@ -42,20 +42,41 @@ module.exports = function (app) {
         return;
       }
     });
-    if (!userExist) {
-      res.send(false);
-      return;
-    }
   });
 
   //POST ROUTES
   //===========
 
+  //Req Data unique ID, profile Pic
   app.post("/api/CreateProfile", function (req, res) {
     data = req.body;
-    var valid = addUser(
-      new UserProfile(data.name, data.uniqueID, data.profilePic, data.scores)
-    );
+    var valid = addUser(new UserProfile(data.uniqueID, data.profilePic));
     res.json(valid);
+  });
+
+  //Req data { firstName, lastName, gender, scores, desiredGender}
+  app.post("/api/UpdateProfile/:userID", function (req, res) {
+    userExist = false;
+    data = req.body;
+    userProfiles.forEach((profile) => {
+      if (profile.uniqueID === req.params.userID) {
+        //Update profiles
+        profile.addNames(data.firstName, data.lastName);
+        profile.gender = data.gender;
+        profile.desiredGender = data.desiredGender;
+        profile.addScores(data.scores);
+
+        //Send Match
+        res.send(profile.getMatch());
+        userExist = true;
+        return;
+      }
+    });
+    if (!userExist) {
+      res.send(false);
+      return;
+    }
+
+    res.json();
   });
 };

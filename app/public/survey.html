@@ -117,7 +117,7 @@
         <img
           style="height: 2rem; width: auto;"
           class="img-fluid"
-          src="../../assets/images/ladybug.png"
+          src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
           alt=""
         />
         LoveBug</a
@@ -176,9 +176,11 @@
 
     <!-- Full Page Intro -->
     <div class="container view mw-100 mh-100 p-0 m-0">
-      <div class="row m-0 p-0 no-gutters h-100">
+      <div class="row row-cols-1 row-cols-md-2 m-0 p-0 no-gutters h-100">
         <!-- profile pic insterted here -->
-        <div class="col-4 view pink lighten-5 border-right border-light">
+        <div
+          class="col-12 col-md-4 view pink lighten-5 border-right border-light"
+        >
           <img
             class="h-100"
             src="https://images.pexels.com/photos/1757281/pexels-photo-1757281.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
@@ -186,7 +188,7 @@
           />
         </div>
         <!-- Survey form -->
-        <div class="col p-4 mt-5 anyClass">
+        <div class="col-12 col-md-8 p-4 mt-5 anyClass">
           <div class="row my-2">
             <!-- Header -->
             <div class="col text-center">
@@ -454,15 +456,45 @@
               </select>
             </div>
             <!-- Grid row -->
-
-            <button
-              type="button"
-              class="btn btn-primary btn-md"
-              data-toggle="modal"
-              data-target="#exampleModalCenter"
-            >
-              See Your Match
-            </button>
+            <div class="row mb-4">
+              <div class="col-2">
+                <label for="select">Gender</label>
+                <select
+                  class="browser-default custom-select"
+                  id="desiredGender"
+                >
+                  <option value="" disabled="" selected="">Your Gender</option>
+                  <option value="1">Female</option>
+                  <option value="2">Male</option>
+                </select>
+              </div>
+              <div class="col-4">
+                <label for="select">What is your desired match gender</label>
+                <select
+                  class="browser-default custom-select"
+                  id="desiredGender"
+                >
+                  <option value="" disabled="" selected=""
+                    >Desired Gender</option
+                  >
+                  <option value="1">Female</option>
+                  <option value="2">Male</option>
+                  <option value="3">Doesnt Matter</option>
+                </select>
+              </div>
+              <div class="col"></div>
+              <div class="col p-3">
+                <button
+                  type="button"
+                  class="btn btn-primary"
+                  id="submitSurvey"
+                  data-toggle="modal"
+                  data-target="#exampleModalCenter"
+                >
+                  See Your Match
+                </button>
+              </div>
+            </div>
           </form>
         </div>
       </div>
@@ -504,10 +536,29 @@
                     src="https://images.pexels.com/photos/1181391/pexels-photo-1181391.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
                     alt=""
                     class="img-fluid"
+                    id="matchPic"
                   />
                 </div>
-                <div class="col">
+                <div class="col text-center">
                   <!-- Info -->
+                  <div class="row border-bottom border-dark my-2">
+                    <h3 class="mx-auto" id="matchName">User Name</h3>
+                  </div>
+                  <div class="row mb-5">
+                    <h5 id="matchQoute">"User Qoute about something"</h5>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 mx-auto">
+                      <h2 id="matchAmt" class="bg-success rounded-pill">8</h2>
+                      <p>Matches</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-6 mx-auto">
+                      <h2 class="bg-success rounded-pill">4</h2>
+                      <p>Followers</p>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -520,7 +571,7 @@
               <img
                 style="height: 1.55rem; width: auto; vertical-align: middle;"
                 class=""
-                src="../../assets/images/ladybug.png"
+                src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
                 alt=""
               /><span class="align-middle"> Bug Em</span>
             </button>
@@ -531,6 +582,39 @@
     <!-- MODAL -->
 
     <!-- ALL SCRIPTS HERE -->
-    <script></script>
+    <script>
+      $(document).ready(function () {
+        //Get user name from storage
+        var userID = sessionStorage.getItem("userID").toLowerCase();
+
+        //Get Values
+
+        //When surver is submitted post all info to database then load info to modal,
+        //then show modal
+        $("#submitSurvey").click(function () {
+          event.preventDefault();
+
+          var temp = {
+            firstName: "Adam 8",
+            lastName: "Doe",
+            scores: ["5", "2", "3", "5", "2", "2", "2", "2", "1", "5"],
+            gender: "male",
+            desiredGender: "female",
+          };
+
+          //Update Profile on database
+          $.post("/api/UpdateProfile/" + userID, temp, function (data, status) {
+            //Populate Module with data
+            $("#matchPic").attr("src", data.profilePic);
+            $("#matchName").html(data.uniqueID);
+            $("#matchAmt").text(data.amtMatched);
+
+            //alert("match: " + data + "\nStatus: " + status);
+            //Clear user name from storage
+            sessionStorage.clear();
+          });
+        });
+      });
+    </script>
   </body>
 </html>

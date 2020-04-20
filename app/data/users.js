@@ -3,12 +3,22 @@ var userProfiles = [];
 
 //// Constructor Objects
 
-var UserProfile = function (name, uniqueID, imageUrl, scores) {
-  //Profile Properties
-  this.name = name.trim().toLowerCase().replace(/\s+/g, "");
+var UserProfile = function (uniqueID, imageUrl) {
+  //Profile initial Properties
+  this.firstName = "";
+  this.lastName = "";
+  this.gender = "";
+  this.desiredGender = "";
+  this.email = "";
+  this.password = "";
   this.uniqueID = uniqueID.trim().toLowerCase().replace(/\s+/g, "");
   this.profilePic = imageUrl;
-  this.scores = scores;
+  this.scores = [];
+
+  //optioinal Properties
+  this.amtMatched = 0;
+  this.amtFollowers = 0;
+
   this.friendMatch;
 
   //Methods
@@ -17,7 +27,10 @@ var UserProfile = function (name, uniqueID, imageUrl, scores) {
     var _lowScore = 10000000;
 
     userProfiles.forEach((profile) => {
-      if (profile.uniqueID === this.uniqueID) {
+      if (
+        profile.uniqueID === this.uniqueID ||
+        profile.gender != this.desiredGender
+      ) {
         return;
       }
       var resultsComparison = profile.scores;
@@ -35,63 +48,22 @@ var UserProfile = function (name, uniqueID, imageUrl, scores) {
     });
 
     friendMatch = _suggestedMatch;
+    _suggestedMatch.amtMatched++;
     return _suggestedMatch;
   };
 
-  //this.suggestedFriends = [];
-  // this.getSuggestedFriends = function () {
-  //   // store suggested results to return
-  //   var _suggestedFriends = [];
+  this.addNames = function (_first, _last) {
+    this.firstName = _first.trim().toLowerCase().replace(/\s+/g, "");
+    this.lastName = _last.trim().toLowerCase().replace(/\s+/g, "");
+  };
 
-  //   //Array with profile and score object
-  //   var searchResults = [];
-
-  //   //Compare function to sort array by score
-  //   function compare(a, b) {
-  //     var scoreA = a.score;
-  //     var scoreB = b.score;
-
-  //     let comparison = 0;
-  //     if (scoreA > scoreB) {
-  //       comparison = 1;
-  //     } else if (scoreA < scoreB) {
-  //       comparison = -1;
-  //     }
-  //     return comparison;
-  //   }
-
-  //   //Go through each object in profiles, pull survey results, subtract scores to get match score total,
-  //   //store score and profile in results array. {profile: element, score: score}
-  //   userProfiles.forEach((profile) => {
-  //     var resultsComparison = profile.scores;
-  //     var userResults = this.scores;
-  //     var matchScore = 0;
-
-  //     for (var i = 0; i < userResults.length; i++) {
-  //       matchScore =
-  //         matchScore + Math.abs(userResults[i] - resultsComparison[i]);
-  //     }
-
-  //     //check if unique id matchs, do not push
-  //     if (profile.uniqueID != this.uniqueID) {
-  //       searchResults.push({ profile: profile, score: matchScore });
-  //     }
-  //   });
-
-  //   //sort search results in ascending order
-  //   searchResults.sort(compare);
-
-  //   //Push top three into suggested friends
-  //   for (i = 0; i < 3; i++) {
-  //     _suggestedFriends.push(searchResults[i].profile);
-  //   }
-
-  //   //Store results to profile
-  //   this.suggestedFriends = _suggestedFriends;
-
-  //   //Return suggested friends
-  //   return _suggestedFriends;
-  // };
+  this.addScores = function (_scores) {
+    _scores.forEach((value) => {
+      var temp = [];
+      temp.push(parseInt(value));
+      this.scores = temp;
+    });
+  };
 };
 
 //// Functions
@@ -118,57 +90,42 @@ function addUser(_profile) {
   }
 }
 
+//create an array of 10 random numbers between 1-5
+function getRandomScores() {
+  var _scores = [];
+  for (var i = 0; i < 10; i++) {
+    _scores.push(Math.floor(Math.random() * (6 - 1) + 1));
+  }
+  return _scores;
+}
+
 //Starter Profiles
 userProfiles.push(
-  new UserProfile("iyan", "dwbucks", "www.mypic.com/pic", [
-    1,
-    2,
-    4,
-    5,
-    1,
-    4,
-    3,
-    1,
-    4,
-    3,
-  ]),
-  new UserProfile("johnny", "yup", "www.mypic.com/pic", [
-    4,
-    3,
-    1,
-    4,
-    3,
-    3,
-    3,
-    5,
-    5,
-    2,
-  ]),
-  new UserProfile("mike", "shemmy", "www.mypic.com/pic", [
-    3,
-    3,
-    5,
-    2,
-    4,
-    5,
-    6,
-    2,
-    5,
-    1,
-  ]),
-  new UserProfile("dre", "cuts", "www.mypic.com/pic", [
-    5,
-    6,
-    2,
-    5,
-    1,
-    3,
-    1,
-    4,
-    3,
-    3,
-  ])
+  new UserProfile(
+    "DaDude",
+    "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "LadyWorcisterSauce",
+    "https://images.pexels.com/photos/1068207/pexels-photo-1068207.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "LikeaDove",
+    "https://images.pexels.com/photos/38554/girl-people-landscape-sun-38554.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "cuts",
+    "https://images.pexels.com/photos/2769172/pexels-photo-2769172.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  )
 );
+
+userProfiles.forEach((profile) => {
+  profile.scores = getRandomScores();
+});
+userProfiles[0].gender = "male";
+userProfiles[1].gender = "female";
+userProfiles[2].gender = "female";
+userProfiles[3].gender = "male";
 
 // Exports
 module.exports = {
@@ -180,3 +137,4 @@ module.exports = {
 //Debug
 //console.log(userProfiles);
 //console.log(userProfiles[1].getMatch());
+getRandomScores();

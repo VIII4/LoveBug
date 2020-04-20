@@ -9,8 +9,11 @@ var PORT = /* For heroko ... process.env.PORT || */ 3000;
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//Import ROUTES
+//Import API ROUTES
 require("./app/routing/apiRoutes")(app);
+
+//Import PAGES ROUTES
+require("./app/routing/htmlRoutes")(app);
 
 // Starts the server to begin listening
 app.listen(PORT, function () {
