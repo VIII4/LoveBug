@@ -7,7 +7,7 @@ var path = require("path");
 //All HTML ROUTES
 module.exports = function (app) {
   //Load Home page
-  app.get("/home", function (req, res) {
+  app.get("/", function (req, res) {
     res.sendFile(path.join(__dirname, "../public/home.html"));
   });
 
@@ -18,6 +18,6 @@ module.exports = function (app) {
 
   //Load Profile Page
   app.get("/profiles", function (req, res) {
-    res.sendFile(path.join(__dirname, "../public/profile.html"));
+    res.sendFile(path.join(__dirname, "../public/profiles.html"));
   });
 };

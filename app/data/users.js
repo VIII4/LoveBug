@@ -27,23 +27,23 @@ var UserProfile = function (uniqueID, imageUrl) {
     var _lowScore = 10000000;
 
     userProfiles.forEach((profile) => {
-      if (
-        profile.uniqueID === this.uniqueID ||
-        profile.gender != this.desiredGender
-      ) {
+      if (profile.uniqueID === this.uniqueID) {
         return;
       }
-      var resultsComparison = profile.scores;
-      var userResults = this.scores;
-      var matchScore = 0;
+      //
+      else if (profile.gender === this.desiredGender) {
+        var resultsComparison = profile.scores;
+        var userResults = this.scores;
+        var matchScore = 0;
 
-      for (var i = 0; i < userResults.length; i++) {
-        matchScore =
-          matchScore + Math.abs(userResults[i] - resultsComparison[i]);
-      }
-      if (matchScore < _lowScore) {
-        _suggestedMatch = profile;
-        _lowScore = matchScore;
+        for (var i = 0; i < userResults.length; i++) {
+          matchScore =
+            matchScore + Math.abs(userResults[i] - resultsComparison[i]);
+        }
+        if (matchScore < _lowScore) {
+          _suggestedMatch = profile;
+          _lowScore = matchScore;
+        }
       }
     });
 
@@ -61,8 +61,8 @@ var UserProfile = function (uniqueID, imageUrl) {
     var temp = [];
     _scores.forEach((value) => {
       temp.push(parseInt(value));
-      this.scores = temp;
     });
+    this.scores = temp;
   };
 };
 

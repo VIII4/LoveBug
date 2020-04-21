@@ -84,6 +84,36 @@
         height: 95vh;
         overflow-y: scroll;
       }
+
+      .card-img-top {
+        width: 100%;
+        object-fit: cover;
+      }
+
+      /* Small devices (landscape phones, 576px and up) */
+      @media (min-width: 576px) {
+        .card-img-top {
+          height: 40vw;
+        }
+      }
+      /* Medium devices (tablets, 768px and up) */
+      @media (min-width: 768px) {
+        .card-img-top {
+          height: 30vw;
+        }
+      }
+      /* Large devices (desktops, 992px and up) */
+      @media (min-width: 992px) {
+        .card-img-top {
+          height: 25vw;
+        }
+      }
+      /* Extra large devices (large desktops, 1200px and up) */
+      @media (min-width: 992px) {
+        .card-img-top {
+          height: 20vw;
+        }
+      }
     </style>
 
     <!-- JS Frameworks -->
@@ -112,11 +142,11 @@
     <!-- Profiles Page -->
 
     <!-- Nav Bar -->
+    <!-- Nav Bar -->
     <nav class="navbar fixed-top navbar-dark pink accent-2">
       <a class="navbar-brand" href="#">
         <img
           style="height: 2rem; width: auto;"
-          class="img-fluid"
           src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
           alt=""
         />
@@ -136,15 +166,17 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link waves-effect waves-light" href="#"
+            <a class="nav-link waves-effect waves-light" href="/"
               >Home <span class="sr-only">(current)</span></a
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="#">Profiles</a>
+            <a class="nav-link waves-effect waves-light" href="/profiles"
+              >Profiles</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="#"></a>
+            <a class="nav-link waves-effect waves-light" href="#">Log In</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -212,50 +244,18 @@
           </div>
         </div>
         <!-- Profile Card Gallery form -->
-        <div class="col-md-8 col-12 p-4 mt-5 white">
+        <div class="col-md-8 col-12 p-4 mt-5 white anyClass">
           <div class="row my-2">
             <!-- Header -->
             <div class="col text-center">
               <h3>Members</h3>
             </div>
           </div>
-          <!-- Card Gallery -->
-          <div class="row row-cols-1 row-cols-md-2">
-            <!-- Member Card -->
-            <div class="col mb-4">
-              <div class="card mb-3" style="max-width: 540px;">
-                <div class="row no-gutters">
-                  <div class="col-md-4">
-                    <img
-                      src="https://images.pexels.com/photos/1181391/pexels-photo-1181391.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                      class="card-img"
-                      alt="..."
-                    />
-                  </div>
-                  <div class="col-md-8">
-                    <div class="card-body">
-                      <!-- Title -->
-                      <h4 class="card-title"><strong>User Handle</strong></h4>
-                      <!-- Subtitle -->
-                      <h6 class="font-weight-bold indigo-text pb-0">
-                        "User submitted qoute"
-                      </h6>
-                      <!-- Text -->
-                      <p class="card-text">
-                        Lorem ipsum dolor sit amet, consectetur adipisicing
-                        elit. Voluptatibus, ex, recusandae. Facere modi sunt,
-                        quod quibusdam.
-                      </p>
-
-                      <!-- Button -->
-                      <a class="btn btn-unique">See Profile</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- Member Card -->
-          </div>
+          <!-- Card Gallery  Made dynamicly from DB -->
+          <div
+            id="profile-gallery"
+            class="row row-cols-1 row-cols-md-2 row-cols-lg-3"
+          ></div>
         </div>
       </div>
       <!-- Mask -->
@@ -264,6 +264,69 @@
     <!-- Full Page Intro -->
 
     <!-- ALL SCRIPTS HERE -->
-    <script></script>
+    <script>
+      //Global Var
+      var profileGallery = $("#profile-gallery");
+      //Functions
+
+      //Events
+
+      //Load current user to side profile
+      $.get("/api/profiles", function (data, status) {
+        console.log(data);
+        data.forEach((profile, i) => {
+          //Create a card root for each profile and append to gallery
+          var cardRoot = $("<div>")
+            .attr("id", "user-profile-" + i)
+            .addClass("col mb-4");
+
+          var card = $("<div>").addClass("card h-100");
+
+          //Append card to root
+          cardRoot.append(card);
+
+          var cardImg = $("<img style='hieght: 20px'>")
+            .attr("src", profile.profilePic)
+            .addClass("card-img-top ");
+
+          card.append(cardImg);
+
+          var cardBody = $("<div>").addClass("card-body");
+
+          card.append(cardBody);
+
+          cardBody.append(
+            "<h5 class='text-center'><strong>" +
+              profile.uniqueID +
+              "</strong></h5>"
+          );
+
+          var cardListRoot = $("<ul class='list-group list-group-flush'></ul>");
+          var cardList = $("<ul class='list-group'>");
+          cardListRoot.append(cardList);
+
+          var matchesListItem = $(
+            "<li class='list-group-item d-flex justify-content-between align-items-center'>Matches<a href='#' class='badge badge-pill teal'><i class='fas fa-heart fa-2x' aria-hidden='true'></i>" +
+              profile.amtMatched +
+              "</a></li>"
+          );
+          var followersListItem = $(
+            "<li class='list-group-item d-flex justify-content-between align-items-center'>Followers<a href='#' class='badge badge-pill teal'><i class='fas fa-users fa-2x' aria-hidden='true'></i>  26</a></li>"
+          );
+          var profileListItem = $(
+            "<li class='list-group-item d-flex justify-content-between align-items-center'>Profile<a href='' data='button-user-" +
+              profile.uniqueID +
+              "' class='badge badge-pill teal'><i class='fas fa-id-badge fa-2x' aria-hidden='true'></i></a></li>"
+          );
+          cardList.append(matchesListItem, followersListItem, profileListItem);
+          cardBody.append(cardListRoot);
+
+          //Append card with all properties
+          profileGallery.append(cardRoot);
+        });
+      });
+      //load all users into card gallery
+      $(document).ready(function () {});
+    </script>
   </body>
 </html>
