@@ -21,7 +21,7 @@ module.exports = function (app) {
     userExist = false;
     userProfiles.forEach((profile) => {
       if (profile.uniqueID === req.params.userID) {
-        res.send(profile.getMatch());
+        res.send(profile);
         userExist = true;
         return;
       }

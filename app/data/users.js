@@ -58,8 +58,8 @@ var UserProfile = function (uniqueID, imageUrl) {
   };
 
   this.addScores = function (_scores) {
+    var temp = [];
     _scores.forEach((value) => {
-      var temp = [];
       temp.push(parseInt(value));
       this.scores = temp;
     });
