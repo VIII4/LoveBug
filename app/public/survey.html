@@ -200,7 +200,7 @@
             </div>
           </div>
 
-          <form class>
+          <form id="survey-form">
             <!-- Grid row -->
             <div class="form-row">
               <!-- Grid column -->
@@ -243,9 +243,9 @@
                 <div class="md-form form-group">
                   <input
                     type="email"
-                    class="form-control"
+                    class="form-control disabled"
                     id="userEmail"
-                    placeholder="Email"
+                    placeholder="Log in feature coming soon"
                   />
                   <label for="inputEmail4MD">Email</label>
                 </div>
@@ -258,9 +258,9 @@
                 <div class="md-form form-group">
                   <input
                     type="password"
-                    class="form-control"
+                    class="form-control disabled"
                     id="userPassword"
-                    placeholder="Password"
+                    placeholder="Log in feature coming soon"
                   />
                   <label for="inputPassword">Password</label>
                 </div>
@@ -463,7 +463,11 @@
             <div class="row mb-4">
               <div class="col-2">
                 <label for="select">Gender</label>
-                <select class="browser-default custom-select" id="userGender">
+                <select
+                  class="browser-default custom-select"
+                  id="userGender"
+                  required
+                >
                   <option value="" disabled="" selected="">Your Gender</option>
                   <option value="female">Female</option>
                   <option value="male">Male</option>
@@ -474,6 +478,7 @@
                 <select
                   class="browser-default custom-select"
                   id="desiredGender"
+                  required
                 >
                   <option value="" disabled="" selected=""
                     >Desired Gender</option
@@ -485,13 +490,7 @@
               </div>
               <div class="col"></div>
               <div class="col p-3">
-                <button
-                  type="button"
-                  class="btn btn-primary"
-                  id="submitSurvey"
-                  data-toggle="modal"
-                  data-target="#exampleModalCenter"
-                >
+                <button type="submit" class="btn btn-primary" id="submitSurvey">
                   See Your Match
                 </button>
               </div>
@@ -508,7 +507,7 @@
     <!-- MODAL -->
     <div
       class="modal fade"
-      id="exampleModalCenter"
+      id="profile-modal"
       tabindex="-1"
       role="dialog"
       aria-labelledby="exampleModalCenterTitle"
@@ -531,8 +530,8 @@
           <div class="modal-body">
             <div class="container-fluid">
               <div class="row">
+                <!-- Profile Pic -->
                 <div class="col">
-                  <!-- Profile pic -->
                   <img
                     src="https://images.pexels.com/photos/1181391/pexels-photo-1181391.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
                     alt=""
@@ -540,27 +539,62 @@
                     id="matchPic"
                   />
                 </div>
+                <!-- Profile Pic -->
+
+                <!-- Profile Info -->
                 <div class="col text-center">
-                  <!-- Info -->
                   <div class="row border-bottom border-dark my-2">
                     <h3 class="mx-auto" id="matchName">User Name</h3>
                   </div>
-                  <div class="row mb-5">
-                    <h5 id="matchQoute">"User Qoute about something"</h5>
+                  <div class="row mb-1">
+                    <!-- TO DO: user quote  -->
                   </div>
-                  <div class="row">
-                    <div class="col-6 mx-auto">
-                      <h2 id="matchAmt" class="bg-success rounded-pill">8</h2>
-                      <p>Matches</p>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-6 mx-auto">
-                      <h2 class="bg-success rounded-pill">4</h2>
-                      <p>Followers</p>
-                    </div>
+                  <div class="row px-0 mx-auto">
+                    <ul class="list-group list-group-flush w-100">
+                      <ul class="list-group">
+                        <li
+                          class="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                          Matches<a
+                            id="matchAmt"
+                            href="#"
+                            class="badge badge-pill teal"
+                            ><i
+                              class="fas fa-heart fa-2x"
+                              aria-hidden="true"
+                            ></i
+                            >0</a
+                          >
+                        </li>
+                        <li
+                          class="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                          Followers<a href="#" class="badge badge-pill teal"
+                            ><i
+                              class="fas fa-users fa-2x"
+                              aria-hidden="true"
+                            ></i>
+                            26</a
+                          >
+                        </li>
+                        <li
+                          class="list-group-item d-flex justify-content-between align-items-center"
+                        >
+                          Profile<a
+                            href=""
+                            data="button-user-cuts"
+                            class="badge badge-pill teal"
+                            ><i
+                              class="fas fa-id-badge fa-2x"
+                              aria-hidden="true"
+                            ></i
+                          ></a>
+                        </li>
+                      </ul>
+                    </ul>
                   </div>
                 </div>
+                <!-- Profile Info -->
               </div>
             </div>
           </div>
@@ -602,8 +636,22 @@
         console.log(scores);
       }
 
+      function isValid() {
+        var _isValid = true;
+        var inputs = document.getElementById("survey-form").elements;
+        inputs.forEach((element) => {
+          if (element.hasAttribute("required") && element.value === "") {
+            _isValid = false;
+          }
+        });
+
+        return _isValid;
+      }
+
       //Get user name from storage
-      var userID = sessionStorage.getItem("userID").toLowerCase();
+      var userID = sessionStorage.getItem("userID")
+        ? sessionStorage.getItem("userID").toLowerCase()
+        : /* default profile */ "dadude";
 
       //Get userprofile
       $.get("/api/profile/" + userID, function (data, status) {
@@ -616,20 +664,18 @@
         $("#submitSurvey").click(function () {
           event.preventDefault();
 
+          //
+          if (!isValid()) {
+            alert("Please answer all required");
+            return;
+          }
+
+          // Retrieve survey data
           var _scores = getScores();
           var _firstName = $("#firstName").val();
           var _lastName = $("#lastName").val();
           var _gender = $("#userGender").val();
           var _desiredGender = $("#desiredGender").val();
-
-          // //debug
-          // var temp = {
-          //   firstName: "Adam 8",
-          //   lastName: "Doe",
-          //   scores: ["5", "2", "3", "5", "2", "2", "2", "2", "1", "5"],
-          //   gender: "male",
-          //   desiredGender: "female",
-          // };
 
           var temp = {
             firstName: _firstName,
@@ -643,12 +689,18 @@
           $.post("/api/UpdateProfile/" + userID, temp, function (data, status) {
             //Populate Module with data
             $("#matchPic").attr("src", data.profilePic);
-            $("#matchName").html(data.uniqueID);
-            $("#matchAmt").text(data.amtMatched);
+            $("#matchName").html(
+              data.uniqueID.charAt(0).toUpperCase() + data.uniqueID.slice(1)
+            );
 
-            
+            //$("#matchName").html(data.uniqueID);
+            $("#matchAmt").append(data.amtMatched);
+
+            // Toggle Modal on
+            $("#profile-modal").modal("toggle");
           });
         });
+
         $("#all-profiles").click(function () {
           window.location.href = "/profiles";
         });

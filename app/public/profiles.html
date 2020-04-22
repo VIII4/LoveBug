@@ -295,17 +295,19 @@
     <!-- ALL SCRIPTS HERE -->
     <script>
       //Global Var
-      var userID = sessionStorage.getItem("userID").toLowerCase();
-      var profileGallery = $("#profile-gallery");
-      //Functions
+      var userID = sessionStorage.getItem("userID")
+        ? sessionStorage.getItem("userID").toLowerCase()
+        : /* default profile */ "dadude";
 
-      //Events
+      var profileGallery = $("#profile-gallery");
 
       //Load current user to side profile
       $.get("/api/profile/" + userID, function (data, status) {
         profile = data;
         $("#user-profile-pic").attr("src", profile.profilePic);
-        $("#user-id").html(profile.uniqueID);
+        $("#user-id").html(
+          profile.uniqueID.charAt(0).toUpperCase() + profile.uniqueID.slice(1)
+        );
         $("#user-matches").append(profile.amtMatched);
         //Pic, username, score, full name, last name, email
       });
@@ -336,7 +338,8 @@
 
             cardBody.append(
               "<h5 class='text-center'><strong>" +
-                profile.uniqueID +
+                profile.uniqueID.charAt(0).toUpperCase() +
+                profile.uniqueID.slice(1) +
                 "</strong></h5>"
             );
 
@@ -372,6 +375,7 @@
         });
       });
 
+      //Events
       $(document).ready(function () {});
     </script>
   </body>

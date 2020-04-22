@@ -1,0 +1,144 @@
+<div
+  id="resultsModal"
+  class="modal fade"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog modal-dialog-centered" role="document"">
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">×</button>
+        <h2 class="modal-title"><strong>Best Friiend Match</strong></h2>
+      </div>
+      <div class="modal-body">
+        <h2 id="match-name"></h2>
+        <h2 id="match-food"></h2>
+        <img
+          id="match-img"
+          src="https://media.licdn.com/mpr/mpr/shrinknp_400_400/p/6/005/064/1bd/3435aa3.jpg"
+          alt=""
+        />
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-default"
+          data-dismiss="resultsModal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!--  -->
+
+<div
+  class="modal fade"
+  id="profile-modal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <!-- Add .modal-dialog-centered to .modal-dialog to vertically center the modal -->
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Your Match!</h5>
+        <button
+          type="button"
+          class="close"
+          data-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Profile Pic -->
+            <div class="col">
+              <img
+                src="https://images.pexels.com/photos/1181391/pexels-photo-1181391.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+                alt=""
+                class="img-fluid"
+                id="matchPic"
+              />
+            </div>
+            <!-- Profile Pic -->
+
+            <!-- Profile Info -->
+            <div class="col text-center">
+              <div class="row border-bottom border-dark my-2">
+                <h3 class="mx-auto" id="matchName">User Name</h3>
+              </div>
+              <div class="row mb-1">
+                <h5 id="matchQoute">"User Qoute about something"</h5>
+              </div>
+              <div class="row px-0 mx-auto">
+                <ul class="list-group list-group-flush w-100">
+                  <ul class="list-group">
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Matches<a
+                        id="matchAmt"
+                        href="#"
+                        class="badge badge-pill teal"
+                        ><i class="fas fa-heart fa-2x" aria-hidden="true"></i
+                        >0</a
+                      >
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Followers<a href="#" class="badge badge-pill teal"
+                        ><i class="fas fa-users fa-2x" aria-hidden="true"></i>
+                        26</a
+                      >
+                    </li>
+                    <li
+                      class="list-group-item d-flex justify-content-between align-items-center"
+                    >
+                      Profile<a
+                        href=""
+                        data="button-user-cuts"
+                        class="badge badge-pill teal"
+                        ><i class="fas fa-id-badge fa-2x" aria-hidden="true"></i
+                      ></a>
+                    </li>
+                  </ul>
+                </ul>
+              </div>
+            </div>
+            <!-- Profile Info -->
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button
+          id="all-profiles"
+          type="button"
+          class="btn btn-warning"
+          data-dismiss="modal"
+        >
+          See All Profiles
+        </button>
+        <button type="button" class="btn btn-pink accent-2">
+          <img
+            style="height: 1.55rem; width: auto; vertical-align: middle;"
+            class=""
+            src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
+            alt=""
+          /><span class="align-middle"> Bug Em</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

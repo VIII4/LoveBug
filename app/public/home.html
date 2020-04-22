@@ -172,17 +172,11 @@
     <!-- Full Page Intro -->
     <div class="container view mw-100 mh-100 p-0 m-0">
       <div class="row m-0 p-0 no-gutters view">
-        <div class="col-4 view pink lighten-5 border-right border-light">
-          <img src="" alt="" />
-          <!-- bg or Image pattern here -->
-        </div>
-        <div class="col view">
-          <img
-            class="img-fluid view"
-            src="https://images.pexels.com/photos/2562501/pexels-photo-2562501.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-            alt=""
-          />
-        </div>
+        <img
+          class="img-fluid"
+          src="https://images.pexels.com/photos/2562501/pexels-photo-2562501.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+          alt=""
+        />
       </div>
       <!-- Mask -->
       <div
@@ -213,12 +207,22 @@
                     </p>
                     <div class="md-form">
                       <i class="fas fa-users prefix grey-text"> </i>
-                      <input type="text" id="userID" class="form-control" />
+                      <input
+                        type="text"
+                        id="userID"
+                        class="form-control"
+                        required
+                      />
                       <label for="form3">Unique Handle</label>
                     </div>
                     <div class="md-form">
                       <i class="fas fa-image prefix grey-text"></i>
-                      <input type="text" id="imageUrl" class="form-control" />
+                      <input
+                        type="text"
+                        id="imageUrl"
+                        class="form-control"
+                        required
+                      />
                       <label for="form2">Profile Pic (URL)</label>
                     </div>
 
@@ -271,7 +275,7 @@
         </div>
         <!-- Content -->
       </div>
-      <!-- Mask & flexbox options-->
+      <!-- Mask -->
     </div>
     <!-- Full Page Intro -->
 
@@ -283,6 +287,10 @@
         $("#submitButton").click(function (event) {
           event.preventDefault();
 
+          if ($("#userID").val() === "") {
+            alert("User ID and Image url required");
+            return;
+          }
           var _uniqueId = $("#userID").val();
           var _profilePic = $("#imageUrl").val();
 
