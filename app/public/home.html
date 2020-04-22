@@ -104,11 +104,11 @@
   </head>
   <body>
     <!-- Nav Bar -->
-    <nav class="navbar fixed-top navbar-dark pink accent-2">
+    <nav class="navbar fixed-top navbar-dark red darken-2">
       <a class="navbar-brand" href="#">
         <img
           style="height: 2rem; width: auto;"
-          src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
+          src="https://image.flaticon.com/icons/svg/2627/2627276.svg"
           alt=""
         />
         LoveBug</a
@@ -136,9 +136,6 @@
               >Profiles</a
             >
           </li>
-          <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="#">Log In</a>
-          </li>
           <li class="nav-item dropdown">
             <a
               class="nav-link dropdown-toggle waves-effect waves-light"
@@ -158,9 +155,6 @@
                 >All Users</a
               >
               <a class="dropdown-item waves-effect waves-light" href="#"
-                >Specific User</a
-              >
-              <a class="dropdown-item waves-effect waves-light" href="#"
                 ><i class="fab fa-github"></i> Git Repo</a
               >
             </div>
@@ -169,7 +163,7 @@
       </div>
     </nav>
 
-    <!-- Full Page Intro -->
+    <!-- Full Page Cover -->
     <div class="container view mw-100 mh-100 p-0 m-0">
       <div class="row m-0 p-0 no-gutters view">
         <img
@@ -196,13 +190,13 @@
                   <form name="">
                     <!-- Heading -->
                     <h3 class="dark-grey-text text-center">
-                      <strong>Find Your Match Now</strong>
+                      <strong>Catch the LoveBug </strong>
                     </h3>
                     <hr />
                     <p>
                       <strong>
-                        Choose a Handle and submit a profile pic(Url) to get
-                        Started</strong
+                        Choose a username and submit a profile pic url to get
+                        started</strong
                       >
                     </p>
                     <div class="md-form">
@@ -213,7 +207,7 @@
                         class="form-control"
                         required
                       />
-                      <label for="form3">Unique Handle</label>
+                      <label for="form3">User Name</label>
                     </div>
                     <div class="md-form">
                       <i class="fas fa-image prefix grey-text"></i>
@@ -223,11 +217,11 @@
                         class="form-control"
                         required
                       />
-                      <label for="form2">Profile Pic (URL)</label>
+                      <label for="form2">Profile Pic(url)</label>
                     </div>
 
                     <div class="text-center">
-                      <button class="btn btn-pink accent-2" id="submitButton">
+                      <button class="btn btn-red" id="submitButton">
                         <img
                           style="
                             height: 1.75rem;
@@ -235,7 +229,7 @@
                             vertical-align: middle;
                           "
                           class="img-fluid"
-                          src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
+                          src="https://image.flaticon.com/icons/svg/2627/2627276.svg"
                           alt=""
                         />
                       </button>
@@ -251,22 +245,21 @@
 
             <!--Grid column-->
             <div class="col-md-6 mb-4 py-3 white-text text-center text-md-left">
-              <h1 class="display-4 font-weight-bold">
-                Catch The Love Bug
-              </h1>
+              <h3 class="display-3 font-weight-bold">
+                Simple. Effective. LoveBug.
+              </h3>
 
               <hr class="hr-light" />
 
               <p>
-                <strong> Find someone blah blah blah</strong>
+                <strong> In 2 Easy Steps, Find Your Match.</strong>
               </p>
 
               <p class="mb-4 d-none d-md-block">
                 <strong
-                  >Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                  Aliquam mattis sed arcu eu consequat. Vestibulum convallis
-                  facilisis tortor, et porttitor erat elementum ut.</strong
-                >
+                  >Done with the scene, tired of complicated dating apps? Answer
+                  a few questions and let the LoveBug show you your match.
+                </strong>
               </p>
             </div>
             <!--Grid column-->
@@ -277,24 +270,36 @@
       </div>
       <!-- Mask -->
     </div>
-    <!-- Full Page Intro -->
+    <!-- Full Cover -->
 
     <!-- ALL SCRIPTS HERE -->
     <script>
+      function validateUrl(url) {
+        return url.match(/\.(jpeg|jpg|gif|png)$/) != null;
+        console.log(url);
+      }
+
       $(document).ready(function () {
         var currentUrl = window.location.origin;
 
         $("#submitButton").click(function (event) {
           event.preventDefault();
 
-          if ($("#userID").val() === "") {
-            alert("User ID and Image url required");
+          // VALIDATIONS
+          if ($("#userID").val() === "" || $("#imageUrl").val() === "") {
+            alert("User Name and Image url required");
             return;
           }
+
+          if (!validateUrl($("#imageUrl").val())) {
+            alert("Please insert valid image url");
+            return;
+          }
+          // End VALIDATIONS
+
           var _uniqueId = $("#userID").val();
           var _profilePic = $("#imageUrl").val();
 
-          console.log(_uniqueId + " " + _profilePic);
           //Send Data to database and load survey page
           $.post(
             "/api/CreateProfile",

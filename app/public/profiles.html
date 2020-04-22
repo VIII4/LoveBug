@@ -148,12 +148,11 @@
     <!-- Profiles Page -->
 
     <!-- Nav Bar -->
-    <!-- Nav Bar -->
-    <nav class="navbar fixed-top navbar-dark pink accent-2">
+    <nav class="navbar fixed-top navbar-dark red darken-2">
       <a class="navbar-brand" href="#">
         <img
           style="height: 2rem; width: auto;"
-          src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
+          src="https://image.flaticon.com/icons/svg/2627/2627276.svg"
           alt=""
         />
         LoveBug</a
@@ -216,7 +215,7 @@
 
     <!-- Full Page Intro -->
     <div class="container view mw-100 mh-100 p-0 m-0">
-      <div class="row row-cols-1 pink lighten-5 m-0 p-0 h-100">
+      <div class="row row-cols-1 grey lighten-2 m-0 p-0 h-100">
         <!-- User Profile Panel -->
         <div class="col-md-4 col-12 border-right border-light my-4 py-5">
           <div class="container">
@@ -252,22 +251,28 @@
             </div>
           </div>
 
-          <div class="container bg-white border border-light my-3 py-3">
-            <div class="row d-flex justify-content-between p-3">
-              <!-- two panels, view and edit -->
-              <h6>First Name</h6>
-              <h6>Last Name</h6>
-            </div>
-            <div class="row d-flex justify-content-between p-3">
-              <!-- two panels, view and edit -->
-              <h6>Email</h6>
-              <h6>Gender</h6>
-            </div>
+          <div class="container bg-white border border-light my-3 py-2">
+            <h4 class="text-center">Bio</h4>
+            <hr />
+            <div class="row w-75 mx-auto">
+              <div class="col">
+                <div class="row d-flex justify-content-between p-3">
+                  <!-- two panels, view and edit -->
+                  <h6 id="user-first-name">First Name</h6>
+                  <h6 id="user-last-name">Last Name</h6>
+                </div>
+                <div class="row d-flex justify-content-between p-3">
+                  <!-- two panels, view and edit -->
+                  <h6 id="user-email">Email</h6>
+                  <h6 id="user-gender">Gender</h6>
+                </div>
 
-            <div class="row d-flex justify-content-between p-3">
-              <!-- two panels, view and edit -->
-              <h6>Maybe</h6>
-              <h6>Some other stuff</h6>
+                <div class="row d-flex justify-content-between p-3">
+                  <!-- two panels, view and edit -->
+                  <h6>Maybe</h6>
+                  <h6>Some other stuff</h6>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -310,6 +315,19 @@
         );
         $("#user-matches").append(profile.amtMatched);
         //Pic, username, score, full name, last name, email
+        $("#user-first-name").html(
+          profile.firstName === ""
+            ? "First Name"
+            : profile.firstName.charAt(0).toUpperCase() +
+                profile.firstName.slice(1)
+        );
+        $("#user-last-name").html(
+          profile.lastName === ""
+            ? "Last Name"
+            : profile.lastName.charAt(0).toUpperCase() +
+                profile.lastName.slice(1)
+        );
+        $("#user-gender").html(profile.gender);
       });
 
       //load all users into card gallery
