@@ -102,12 +102,12 @@ function getRandomScores() {
 //Starter Profiles
 userProfiles.push(
   new UserProfile(
-    "DaDude",
+    "Goosebump",
     "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
   ),
   new UserProfile(
-    "LadyWorcisterSauce",
-    "https://images.pexels.com/photos/1068207/pexels-photo-1068207.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+    "HarrowSparrow",
+    "https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
   ),
   new UserProfile(
     "LikeaDove",
@@ -116,6 +116,38 @@ userProfiles.push(
   new UserProfile(
     "cuts",
     "https://images.pexels.com/photos/2769172/pexels-photo-2769172.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "DewMountain",
+    "https://images.pexels.com/photos/936229/pexels-photo-936229.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "sunshine",
+    "https://images.pexels.com/photos/1666073/pexels-photo-1666073.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "De_coder",
+    "https://images.pexels.com/photos/845457/pexels-photo-845457.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "warbucks",
+    "https://images.pexels.com/photos/936049/pexels-photo-936049.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "Flowrage",
+    "https://images.pexels.com/photos/1066331/pexels-photo-1066331.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "CoolLawStudent",
+    "https://images.pexels.com/photos/1757281/pexels-photo-1757281.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
+  ),
+  new UserProfile(
+    "Dappa",
+    "https://images.pexels.com/photos/1170974/pexels-photo-1170974.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260"
+  ),
+  new UserProfile(
+    "Beats",
+    "https://images.pexels.com/photos/2535859/pexels-photo-2535859.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
   )
 );
 
