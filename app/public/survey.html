@@ -116,7 +116,6 @@
       <a class="navbar-brand" href="#">
         <img
           style="height: 2rem; width: auto;"
-          class="img-fluid"
           src="https://image.flaticon.com/icons/svg/2021/2021729.svg"
           alt=""
         />
@@ -141,10 +140,12 @@
             >
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="#">Profiles</a>
+            <a class="nav-link waves-effect waves-light" href="/profiles"
+              >Profiles</a
+            >
           </li>
           <li class="nav-item">
-            <a class="nav-link waves-effect waves-light" href="#"></a>
+            <a class="nav-link waves-effect waves-light" href="#">Log In</a>
           </li>
           <li class="nav-item dropdown">
             <a
@@ -564,7 +565,12 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-warning" data-dismiss="modal">
+            <button
+              id="all-profiles"
+              type="button"
+              class="btn btn-warning"
+              data-dismiss="modal"
+            >
               See All Profiles
             </button>
             <button type="button" class="btn btn-pink accent-2">
@@ -596,15 +602,15 @@
         console.log(scores);
       }
 
+      //Get user name from storage
+      var userID = sessionStorage.getItem("userID").toLowerCase();
+
+      //Get userprofile
+      $.get("/api/profile/" + userID, function (data, status) {
+        $("#userPic").attr("src", data.profilePic);
+      });
+
       $(document).ready(function () {
-        //Get user name from storage
-        var userID = sessionStorage.getItem("userID").toLowerCase();
-
-        //Get userprofile
-        $.get("/api/profile/" + userID, function (data, status) {
-          $("#userPic").attr("src", data.profilePic);
-        });
-
         //When surver is submitted post all info to database then load info to modal,
         //then show modal
         $("#submitSurvey").click(function () {
@@ -640,10 +646,13 @@
             $("#matchName").html(data.uniqueID);
             $("#matchAmt").text(data.amtMatched);
 
-            //Clear user name from storage
-            sessionStorage.clear();
+            
           });
         });
+        $("#all-profiles").click(function () {
+          window.location.href = "/profiles";
+        });
+        //profile button click
       });
     </script>
   </body>

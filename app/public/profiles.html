@@ -107,11 +107,17 @@
         .card-img-top {
           height: 25vw;
         }
+        #user-profile-pic {
+          height: 27vw;
+        }
       }
       /* Extra large devices (large desktops, 1200px and up) */
       @media (min-width: 992px) {
         .card-img-top {
           height: 20vw;
+        }
+        #user-profile-pic {
+          height: 27vw;
         }
       }
     </style>
@@ -211,36 +217,58 @@
     <!-- Full Page Intro -->
     <div class="container view mw-100 mh-100 p-0 m-0">
       <div class="row row-cols-1 pink lighten-5 m-0 p-0 h-100">
-        <!-- User Profile -->
+        <!-- User Profile Panel -->
         <div class="col-md-4 col-12 border-right border-light my-4 py-5">
-          <div class="container bg-white border-dark my-3 py-3">
-            <div class="row">
-              <div class="col">
-                <!-- Profile Pic -->
-                <img
-                  src="https://images.pexels.com/photos/1845534/pexels-photo-1845534.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
-                  class="img-fluid img-thumbnail z-depth-1 rounded-lg"
-                  alt="Avatar"
-                />
-              </div>
-              <div class="col bg-success my-1 mr-3">
-                <!-- User Name and qoutes -->
-                <h3 class="pt-2 text-center">
-                  User Name
-                </h3>
-                <p class="text-center">
-                  "Some kind of qoute from user"
-                </p>
+          <div class="container">
+            <div class="row p-1 m-1 h-100">
+              <!--  -->
 
-                <!-- Stats -->
-                <h3 class="bg-white rounded-pill text-center mx-5">25</h3>
-                <p class="mt-0 text-center">Matches</p>
+              <div class="card mb-3">
+                <img id="user-profile-pic" class="card-img-top" alt="..." />
+                <div class="card-body">
+                  <h3 class="text-center card-title">
+                    <strong id="user-id"></strong>
+                  </h3>
+
+                  <hr />
+                  <div class="row my-1 p-1">
+                    <span
+                      id="user-matches"
+                      class="text-center badge badge-pill teal mx-auto"
+                      ><i class="fas fa-heart fa-2x" aria-hidden="true"></i
+                    ></span>
+                    <span
+                      id="user-followers"
+                      class="text-center badge badge-pill teal mx-auto"
+                      ><i class="fas fa-users fa-2x" aria-hidden="true"></i
+                      >0</span
+                    >
+                    <span class="text-center badge badge-pill teal mx-auto"
+                      ><i class="fas fa-id-badge fa-2x" aria-hidden="true"></i
+                    ></span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          <div class="container bg-white border-dark my-3 py-3">
-            <div class="row"></div>
+          <div class="container bg-white border border-light my-3 py-3">
+            <div class="row d-flex justify-content-between p-3">
+              <!-- two panels, view and edit -->
+              <h6>First Name</h6>
+              <h6>Last Name</h6>
+            </div>
+            <div class="row d-flex justify-content-between p-3">
+              <!-- two panels, view and edit -->
+              <h6>Email</h6>
+              <h6>Gender</h6>
+            </div>
+
+            <div class="row d-flex justify-content-between p-3">
+              <!-- two panels, view and edit -->
+              <h6>Maybe</h6>
+              <h6>Some other stuff</h6>
+            </div>
           </div>
         </div>
         <!-- Profile Card Gallery form -->
@@ -248,7 +276,8 @@
           <div class="row my-2">
             <!-- Header -->
             <div class="col text-center">
-              <h3>Members</h3>
+              <h3>All Members</h3>
+              <hr />
             </div>
           </div>
           <!-- Card Gallery  Made dynamicly from DB -->
@@ -266,66 +295,83 @@
     <!-- ALL SCRIPTS HERE -->
     <script>
       //Global Var
+      var userID = sessionStorage.getItem("userID").toLowerCase();
       var profileGallery = $("#profile-gallery");
       //Functions
 
       //Events
 
       //Load current user to side profile
+      $.get("/api/profile/" + userID, function (data, status) {
+        profile = data;
+        $("#user-profile-pic").attr("src", profile.profilePic);
+        $("#user-id").html(profile.uniqueID);
+        $("#user-matches").append(profile.amtMatched);
+        //Pic, username, score, full name, last name, email
+      });
+
+      //load all users into card gallery
       $.get("/api/profiles", function (data, status) {
-        console.log(data);
         data.forEach((profile, i) => {
-          //Create a card root for each profile and append to gallery
-          var cardRoot = $("<div>")
-            .attr("id", "user-profile-" + i)
-            .addClass("col mb-4");
+          if (profile.uniqueID != userID) {
+            //Create a card root for each profile and append to gallery
+            var cardRoot = $("<div>")
+              .attr("id", "user-profile-" + i)
+              .addClass("col mb-4");
 
-          var card = $("<div>").addClass("card h-100");
+            var card = $("<div>").addClass("card h-100");
 
-          //Append card to root
-          cardRoot.append(card);
+            //Append card to root
+            cardRoot.append(card);
 
-          var cardImg = $("<img style='hieght: 20px'>")
-            .attr("src", profile.profilePic)
-            .addClass("card-img-top ");
+            var cardImg = $("<img style='hieght: 20px'>")
+              .attr("src", profile.profilePic)
+              .addClass("card-img-top ");
 
-          card.append(cardImg);
+            card.append(cardImg);
 
-          var cardBody = $("<div>").addClass("card-body");
+            var cardBody = $("<div>").addClass("card-body");
 
-          card.append(cardBody);
+            card.append(cardBody);
 
-          cardBody.append(
-            "<h5 class='text-center'><strong>" +
-              profile.uniqueID +
-              "</strong></h5>"
-          );
+            cardBody.append(
+              "<h5 class='text-center'><strong>" +
+                profile.uniqueID +
+                "</strong></h5>"
+            );
 
-          var cardListRoot = $("<ul class='list-group list-group-flush'></ul>");
-          var cardList = $("<ul class='list-group'>");
-          cardListRoot.append(cardList);
+            var cardListRoot = $(
+              "<ul class='list-group list-group-flush'></ul>"
+            );
+            var cardList = $("<ul class='list-group'>");
+            cardListRoot.append(cardList);
 
-          var matchesListItem = $(
-            "<li class='list-group-item d-flex justify-content-between align-items-center'>Matches<a href='#' class='badge badge-pill teal'><i class='fas fa-heart fa-2x' aria-hidden='true'></i>" +
-              profile.amtMatched +
-              "</a></li>"
-          );
-          var followersListItem = $(
-            "<li class='list-group-item d-flex justify-content-between align-items-center'>Followers<a href='#' class='badge badge-pill teal'><i class='fas fa-users fa-2x' aria-hidden='true'></i>  26</a></li>"
-          );
-          var profileListItem = $(
-            "<li class='list-group-item d-flex justify-content-between align-items-center'>Profile<a href='' data='button-user-" +
-              profile.uniqueID +
-              "' class='badge badge-pill teal'><i class='fas fa-id-badge fa-2x' aria-hidden='true'></i></a></li>"
-          );
-          cardList.append(matchesListItem, followersListItem, profileListItem);
-          cardBody.append(cardListRoot);
+            var matchesListItem = $(
+              "<li class='list-group-item d-flex justify-content-between align-items-center'>Matches<a href='#' class='badge badge-pill teal'><i class='fas fa-heart fa-2x' aria-hidden='true'></i>" +
+                profile.amtMatched +
+                "</a></li>"
+            );
+            var followersListItem = $(
+              "<li class='list-group-item d-flex justify-content-between align-items-center'>Followers<a href='#' class='badge badge-pill teal'><i class='fas fa-users fa-2x' aria-hidden='true'></i>  26</a></li>"
+            );
+            var profileListItem = $(
+              "<li class='list-group-item d-flex justify-content-between align-items-center'>Profile<a href='' data='button-user-" +
+                profile.uniqueID +
+                "' class='badge badge-pill teal'><i class='fas fa-id-badge fa-2x' aria-hidden='true'></i></a></li>"
+            );
+            cardList.append(
+              matchesListItem,
+              followersListItem,
+              profileListItem
+            );
+            cardBody.append(cardListRoot);
 
-          //Append card with all properties
-          profileGallery.append(cardRoot);
+            //Append card with all properties
+            profileGallery.append(cardRoot);
+          }
         });
       });
-      //load all users into card gallery
+
       $(document).ready(function () {});
     </script>
   </body>
