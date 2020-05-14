@@ -1,6 +1,7 @@
 # LoveBug App (Friend Finder)
-
 Compatibility mathing app powered by JS, NODE, Express.js and Heroku
+
+[https://lovebug-app.herokuapp.com/] ("LoveBug" deployed link) 
 
 ### Lovebug allows user to find a match based on comparisons of survey results. Lovebug also tracks matches allowing users to see all profiles and how many times they have matched. Lovebug api allows developers to retrieve all profiles in json format.
 
