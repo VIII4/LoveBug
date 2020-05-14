@@ -3,6 +3,8 @@ Compatibility mathing app powered by JS, NODE, Express.js and Heroku
 
 ["LoveBug" deployed link] (https://lovebug-app.herokuapp.com/) 
 
+[I'm an inline-style link](https://www.google.com)
+
 ### Lovebug allows user to find a match based on comparisons of survey results. Lovebug also tracks matches allowing users to see all profiles and how many times they have matched. Lovebug api allows developers to retrieve all profiles in json format.
 
 ### Intructions
