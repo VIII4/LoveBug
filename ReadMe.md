@@ -13,7 +13,3 @@ Compatibility mathing app powered by JS, NODE, Express.js and Heroku
 
 ---
 
-Here is a link to a video of the app in use: ( [link Demo]( "Lovebug app demo") )
-
-**Alternatively ()
-_(on the linked page, click on "View raw" to get the video.)_**
